@@ -8,21 +8,33 @@ Run `sudo npm install -g @angular/cli`
 
 ## 2 - Create Angular Project
 
-Go to the folder where the project will be and we create it with  `ng new project-name` for me `ng angular-docker`
+Go to the folder where the project will be and we create it with  `ng new project-name` for me `ng new angular-docker`
 
 ## 3 - Run the Application
 
 Run the application to check that it is working correctly `cd project-name` for me `cd angular-docker` and run `ng serve`. After this
-navigate to `http://localhost:4200/`
+navigate to `http://localhost:4200/`. If it is good close `ng serve` with `ctrl C`
 
-## 4 - Create Dockerfile
+## 4 - Create & Edit Dockerfile
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+In the root of the project we create a Dockerfile
 
-## Running end-to-end tests
+## 5 - Edit package.json
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+In `package.json` change `"start": "ng serve"` for `"start": "ng serve --host 0.0.0.0 --poll 500"`
 
-## Further help
+## 6 - Create .dockerignore
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+In the root of the project we create a .dockerignore and add `dist` & `node_modules`
+
+## 7 - Create docker-compose.yaml
+In the root of the project we create a docker-compose.yaml
+
+## 8 - Run Dockerfile
+Run `docker build -t name_image . --network="host"` in my case `docker build -t angular-app . --network="host"`
+
+## 9 - Run docker-compose
+Run `docker-compose up -d`
+
+## 10 - Check the Application
+Navigate to `http://localhost:4200/` and you will see Angular App
